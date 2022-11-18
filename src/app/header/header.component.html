@@ -1,0 +1,24 @@
+  <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top">
+    <a routerLink="/home" class="text-decoration-none d-block">
+        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">KHAN</span>Shopping</h1>
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav mr-auto py-0">
+            <a routerLink="/home" class="nav-item nav-link" routerLinkActive="active">Home</a>
+            <a routerLink="/products" class="nav-item nav-link" routerLinkActive="active">Shop</a>
+        </div>
+        <div class="navbar-nav ml-auto py-0">
+            <a class="nav-link waves-effect" routerLink="/cart" routerLinkActive="active">
+              <span class="badge red z-depth-1 mr-1"> {{cartLenght}} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+            <a class="nav-link waves-effect" data-toggle="modal" data-target="#myModal1" (click)="onLogOut()">{{signedUserEmail}} - <mark>Logout</mark></a>
+        </div>
+    </div>
+</nav>
+
+<app-sign-out *ngIf="logOut"></app-sign-out>

@@ -1,0 +1,10 @@
+.example-pizza-party {
+    color: rgb(255, 255, 255);
+  }
+
+  .float-start{
+    float: left !important;
+  }
+  .float-end{
+    float: right !important;
+  }

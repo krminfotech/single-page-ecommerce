@@ -1,0 +1,101 @@
+<app-header [productLength]="productLength"></app-header>
+<!-- new start -->
+<div style="padding-bottom: 90px;"></div>
+<!-- end -->
+
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a routerLink="/home">Home</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Shopping Cart</p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Cart Start -->
+<div class="container-fluid">
+  <main>
+    <div class="basket">
+      <div class="basket-module">
+        <!-- <label for="promo-code">Enter a promotional code</label>
+          <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field"> -->
+        <button  *ngIf="cartDatas.length != 0" class="btn btn-danger float-right" (click)="onClearCart()" data-toggle="modal"
+          data-target="#myModal">Clear Cart</button>
+      </div>
+      <div *ngIf="cartDatas.length == 0" class="text-center">
+        <img class="img-responsive" src="https://i.postimg.cc/qB8KmFRD/image-removebg-preview-1.png">
+        <h2>Your cart is empty</h2>
+        <h2 class="btn btn-danger" routerLink="/products">View Products</h2>
+      </div>
+    </div>
+  </main>
+
+  <div  *ngIf="cartDatas.length != 0" class="row px-xl-5">
+    <div class="col-lg-8 table-responsive mb-5">
+      <table class="table table-bordered text-center mb-0">
+        <thead class="bg-secondary text-dark">
+          <tr>
+            <th>Products</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle">
+          <tr *ngFor="let cardData of cartDatas">
+            <td class="align-middle"><img [src]="cardData.imgPath" alt="" style="width: 50px;">  {{cardData.name}}</td>
+            <td class="align-middle">{{cardData.modelName}}</td>
+            <td class="align-middle">₹ {{cardData.amount}}</td>
+            <td class="align-middle">
+              <input type="number" [value]="cardData.qty" #qty (change)="onQty(qty.value, cardData.id)" min="1"
+                class="form-control bg-secondary text-center quantity-field">
+            </td>
+            <td class="align-middle">₹ {{cardData.subTotal}}</td>
+            <td class="align-middle"><button class="btn btn-sm btn-primary" (click)="removeCartData(cardData.name)"><i
+                  class="fa fa-times"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-secondary mb-5">
+        <div class="card-header bg-secondary border-0">
+          <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3 pt-1">
+            <h6 class="font-weight-medium">Subtotal</h6>
+            <h6 class="font-weight-medium">₹ {{total}}</h6>
+          </div>
+          <div class="summary-delivery">
+            <select name="delivery-collection" class="summary-delivery-selection">
+              <option>Cash on Delivery</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-footer border-secondary bg-transparent">
+          <div class="d-flex justify-content-between mt-2">
+            <h5 class="font-weight-bold">Total</h5>
+            <h5 class="font-weight-bold">₹ {{total}}</h5>
+          </div>
+          <button class="btn btn-block btn-primary my-3 py-3" (click)="checkOut()" data-toggle="modal"
+            data-target="#myModal">Proceed To Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Cart End -->
+
+<app-footer></app-footer>
+
+
+<app-cart-page-alert *ngIf="alertMsg"></app-cart-page-alert>

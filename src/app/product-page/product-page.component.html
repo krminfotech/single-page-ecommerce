@@ -1,0 +1,59 @@
+<app-header *ngIf="!loader" [productLength]="productLength"></app-header>
+<div class="mt-5"></div>
+<div class="container-fluid">
+    <!-- <br>
+    <div class="row">
+        <span class="float-right alert alert-success" (click)="falseAlert()" *ngIf="successAlert">
+            {{data}}
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-4" *ngFor = "let product of products">
+            <img [src]="product.imgPath" width="150" height="120">
+            <h4>{{product.name}}</h4>
+            <button class="btn btn-primary" (click)="onAddToCard(product)">Add to Card</button>
+            <br> <br>
+        </div>
+    </div> -->
+<app-loader *ngIf="loader"></app-loader>
+
+<div class="container-fluid pt-5" *ngIf="!loader">
+  <div class="text-center mb-4">
+      <h2 class="section-title px-5"><span class="px-2">
+        Mobile Accessories</span></h2>
+  </div>
+  <div class="row px-xl-5 pb-3">
+      
+      <div class="col-lg-3 col-md-6 col-sm-12 pb-1" *ngFor = "let product of pageOfItems">
+          <div class="card product-item border-0 mb-4">
+              <div data-toggle="modal" data-target="#productModal" (click)="onAddToCardModal(product)" class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                  <img class="img-fluid w-100" [src]="product.imgPath" alt="{{product.name}}" style="height: 250px;">
+              </div>
+              <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                  <h6 class="text-truncate mb-3">{{product.name}}</h6>
+                  <div class="d-flex justify-content-center">
+                      <h6>₹ {{product.amount}}</h6><h6 class="text-muted ml-2"><del>₹ {{product.originalAmount}}</del></h6>
+                  </div>
+              </div>
+              <div class="card-footer d-flex justify-content-center bg-light border">
+                <!-- <a class="btn btn-sm text-dark p-0"  (click)="onAddToCard(product)"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
+                <a class="btn btn-sm text-dark p-0" data-toggle="modal" data-target="#productModal" (click)="onAddToCardModal(product)"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+<div class="card-footer pb-0 pt-3">
+  <jw-pagination [items]="products" (changePage)="onChangePage($event)"></jw-pagination>
+</div>
+
+</div>
+
+<app-product-modal *ngIf="productModal"></app-product-modal>
+
+
+
+    <!-- Footer Start -->
+   <app-footer *ngIf="!loader"></app-footer>
+  <!-- Footer End -->

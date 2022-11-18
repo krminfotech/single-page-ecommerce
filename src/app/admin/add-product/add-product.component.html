@@ -1,0 +1,97 @@
+<app-side-nav-bar>
+
+  <!--Main layout-->
+  <main class="mt-1 pt-2">
+    <div class="container wow fadeIn">
+
+      <div class="row">
+        <div class="col-md-6" *ngFor="let product of products">
+          <img class="img-thumbnail" [src]="product.imgPath">
+          <p>{{product.name}}</p>
+        </div>
+      </div>
+
+      <!-- Heading -->
+      <h2 class="my-5 h2">Add New Product Form</h2>
+
+      <!--Grid row-->
+      <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-8 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!--Card content-->
+
+            <!-- Form Action Start -->
+            <form class="card-body" #f="ngForm" (ngSubmit)="onSubmit(f)">
+              <!--productName-->
+              <div class="md-form mb-4">
+                <label for="productName" class="">Product Name</label>
+                <input type="text" id="productName" class="form-control" [(ngModel)]="model.Category" name="productName"
+                  required>
+              </div>
+
+              <div class="mb-4">
+
+                <label for="categoryName">Category Name</label>
+                <select class="custom-select d-block w-100" id="categoryName" [(ngModel)]="model.categoryName"
+                  name="categoryName" required>
+                  <option value="">Choose...</option>
+                  <option *ngFor="let category of categoryData">{{category.name}}</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid Category Name.
+                </div>
+
+              </div>
+
+              <div class="md-form mb-4">
+                <input type="file" #ImageUrl="ngModel" name="ImageUrl" [(ngModel)]="model.ImageUrl" class="form-control"
+                  (change)="onChange($event)">
+              </div>
+
+              <div class="md-form mb-4" *ngFor="let value of values; let i = index">
+                <label for="productName" class="">Product Name</label>
+                <input type="url" [(ngModel)]="model.imgArrData[i]" #name="ngModel" name="imgArrData{{i}}"
+                  class="form-control">
+                <button (click)="removevalue(i)">Remove</button>
+              </div>
+              <a class="btn btn-primary" (click)="addvalue()">ADD</a>
+
+
+              <div class="md-form mb-4">
+                <label for="productOriginalAmount" class="">Product Original Amount</label>
+                <input type="text" id="productOriginalAmount" class="form-control"
+                  [(ngModel)]="model.productOriginalAmount" name="productOriginalAmount" required>
+              </div>
+
+              <div class="md-form mb-4">
+                <label for="productAmount" class="">Product Amount</label>
+                <input type="text" id="productAmount" class="form-control" [(ngModel)]="model.productAmount"
+                  name="productAmount" required>
+              </div>
+
+
+              <button class="btn btn-primary btn-lg btn-block" [disabled]="!f.valid" data-toggle="modal"
+                data-target="#myModal" type="submit">Add</button>
+            </form>
+            <!-- Form End -->
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+</app-side-nav-bar>

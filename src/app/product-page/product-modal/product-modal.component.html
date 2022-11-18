@@ -1,0 +1,53 @@
+<!-- Modal Start -->
+
+<!-- The Modal -->
+<div class="modal fade" id="productModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title badge badge-danger">Product Details Message!</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        
+        <div class="col-md-12">
+          <form  #registerForm="ngForm">
+            <div class="mb-3 mt-3">
+              <label for="model" class="form-label">Phone Model:</label>
+              <input type="model" class="form-control" id="model" placeholder="Enter Phone Model" required [(ngModel)] = "modal" #model = "ngModel" name="modal">
+              <span class="text-danger"
+              *ngIf="(model.touched || registerForm.submitted) && model.errors?.required">
+              Phone Model is required
+          </span>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-12">
+          <h5>Product Name : <strong>{{products.name}}</strong></h5>
+          <h5>Product Category : <strong>{{products.category}}</strong></h5>
+          <h5>Product Amount : <strong>{{products.amount}}</strong></h5>
+          <h5>Product Original Amount : <strong><del>₹ {{products.originalAmount}}</del></strong></h5>
+          <div>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button class="btn btn-primary" [disabled]="!registerForm.form.valid" (click)="onAddToCard(products)"><i class="fa fa-shopping-cart"></i> Add to
+          Cart</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal end -->

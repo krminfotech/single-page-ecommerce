@@ -1,0 +1,70 @@
+<app-side-nav-bar>
+   
+<app-loader *ngIf="!loadder"></app-loader>
+<br>
+<!-- collapse data start -->
+ <div class="class container">
+    <div id="accordion">
+        <div class="card" *ngFor="let data of checkOutDataDetails">
+          <div [ngClass]="data.delivery ? 'card-header badge-success' : 'card-header badge-danger'">
+            <div class="clearfix">
+                <a class="card-link float-left text-light" data-toggle="collapse" href="#collapseOne{{data.formData.userName}}{{data.orderDate}}">
+                    {{data.formData.userName}} | {{data.orderDate}}
+                </a>
+                <button class="card-link float-right btn-light" [disabled]="data.delivery" (click)="onUpdateDelivery(data.id)">
+                    {{'Delivery Complete'}}
+                </button>
+            </div>
+          </div>
+          <div id="collapseOne{{data.formData.userName}}{{data.orderDate}}" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+               <!-- div data separate start -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9 col-md-4">
+                            <h1>Check Out Data</h1>
+                            <p>{{data.formData.name}}</p>
+                            <p>{{data.formData.email}}</p>
+                            <p>
+                                <a href="https://wa.me/{{data.formData.phoneNumber}}?text=Thank you for Booking, you will get details soon..." target="_blank" >  {{data.formData.phoneNumber}}      </a>
+                            </p>
+                            <p>{{data.formData.address}}</p>
+                            <p>{{data.formData.address2}}</p>
+                            <p>{{data.formData.zip}}</p>
+                            <p>{{data.formData.state}}</p>
+                            <p>{{data.formData.country}}</p>
+                        </div>
+                        <div class="col-3 col-md-8">
+                            <h1>Total Amount</h1>
+                            <p>{{data.total}}</p>
+                        </div>
+                    </div>
+                    <!-- end checkout data row -->
+
+                    <div class="row">
+                        
+                        <div class="col-6 col-md-4" *ngFor="let dataCart of data.cartData">
+                            <img [src]="dataCart.imgPath" class="img-thumbnail" width="150" height="70">
+                            <h1>Cart Data</h1>
+                            <p>{{dataCart.id}}</p>
+                            <p>{{dataCart.name}} - <span class="modelName">{{dataCart.modelName}}</span></p>
+                            <p>{{dataCart.amount}}</p>
+                            <p>{{dataCart.qty}}</p>
+                            <p>{{dataCart.subTotal}}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+               <!-- div data separate end -->
+            </div>
+          </div>
+        </div>
+        
+      </div>
+ </div>
+
+ <!-- collapse data end -->
+</app-side-nav-bar>
+
+<br>
